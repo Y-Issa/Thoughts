@@ -19,11 +19,11 @@ function DrawerLinks() {
     <>
       <Button
         variant="ghost"
-        colorScheme="purple"
+        color="primary.400"
         onClick={onOpen}
         display={{ md: "none" }}
       >
-        <HamburgerIcon />
+        <HamburgerIcon boxSize="25px" />
       </Button>
       <Drawer
         isOpen={isOpen}
@@ -32,7 +32,7 @@ function DrawerLinks() {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent bg="purple.400">
+        <DrawerContent bg="primary.400">
           {/* <DrawerCloseButton color="white" /> */}
           <DrawerHeader>
             <Button variant="unstyled" onClick={onClose}>

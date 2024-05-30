@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function Sidebar() {
   return (
     <List
-      color="white"
+      color="textColor.50"
       fontSize="1.2rem"
       display={{ base: "flex" }}
       flexDir={{ base: "row", md: "column" }}
@@ -13,19 +13,19 @@ function Sidebar() {
     >
       <ListItem>
         <NavLink to="/">
-          <ListIcon as={CalendarIcon} color="white" />
+          <ListIcon as={CalendarIcon} />
           Dashboard
         </NavLink>
       </ListItem>
       <ListItem>
         <NavLink to="/create">
-          <ListIcon as={EditIcon} color="white" />
+          <ListIcon as={EditIcon} />
           New Task
         </NavLink>
       </ListItem>
       <ListItem>
         <NavLink to="/profile">
-          <ListIcon as={AtSignIcon} color="white" />
+          <ListIcon as={AtSignIcon} />
           Profile
         </NavLink>
       </ListItem>

@@ -35,10 +35,10 @@ function Dashboard() {
   return (
     <SimpleGrid
       spacing={10}
-      minChildWidth="280px"
+      minChildWidth="275px"
       overflowY="scroll"
-      h="80vh"
-      p="5px"
+      h="77vh"
+      px="5px"
       css={scrollbarStyle}
     >
       {tasks &&
@@ -46,14 +46,14 @@ function Dashboard() {
           <Card
             key={task.id}
             borderTop="8px"
-            borderColor="purple.400"
-            bg="white"
+            borderColor="primary.400"
+            bg="bgColor.50"
             maxH="390px"
           >
             <CardHeader>
               <Flex gap={5}>
                 <Avatar src={task.img} />
-                <Box>
+                <Box color="textColor.50">
                   <Heading as="h3" size="sm">
                     {task.title}
                   </Heading>
@@ -62,18 +62,32 @@ function Dashboard() {
               </Flex>
             </CardHeader>
 
-            <CardBody color="gray.500" overflowY="scroll" css={scrollbarStyle}>
+            <CardBody
+              color="textColor.300"
+              overflowY="scroll"
+              css={scrollbarStyle}
+            >
               <Text>{task.description}</Text>
             </CardBody>
 
-            <Divider borderColor="gray.200" />
+            <Divider borderColor="textColor.900" />
 
             <CardFooter>
               <HStack>
-                <Button variant="ghost" leftIcon={<ViewIcon />}>
+                <Button
+                  variant="ghost"
+                  color="textColor.200"
+                  leftIcon={<ViewIcon />}
+                  _hover={{ bg: "bgColor.200" }}
+                >
                   Watch
                 </Button>
-                <Button variant="ghost" leftIcon={<EditIcon />}>
+                <Button
+                  variant="ghost"
+                  color="textColor.200"
+                  leftIcon={<EditIcon />}
+                  _hover={{ bg: "bgColor.200" }}
+                >
                   Comment
                 </Button>
               </HStack>
