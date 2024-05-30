@@ -1,17 +1,11 @@
-import { theme as origTheme, extendTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 const alert = {
   variants: {
-    solid: (props) => {
-      const { colorScheme: c } = props;
-      if (c !== "blue") {
-        // use original definition for all color schemes except "blue"
-        return origTheme.components.Alert.variants.solid(props);
-      }
+    solid: () => {
       return {
         container: {
-          bg: "#9F7AEA",
-          // bg: `${c}.400`,
+          bg: "primary.400",
         },
       };
     },
@@ -19,6 +13,9 @@ const alert = {
 };
 
 export const theme_light = extendTheme({
+  components: {
+    Alert: alert,
+  },
   colors: {
     primary: {
       50: "#f3e7ff",
@@ -54,6 +51,9 @@ export const theme_light = extendTheme({
   },
 });
 export const theme_dark = extendTheme({
+  components: {
+    Alert: alert,
+  },
   colors: {
     primary: {
       50: "#d3bfff",
