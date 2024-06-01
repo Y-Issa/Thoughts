@@ -44,9 +44,9 @@ function Navbar() {
       <Heading
         as="h1"
         color="textColor.50"
-        fontSize={{ base: "l", sm: "larger", md: "4xl" }}
+        fontSize={{ base: "l", sm: "larger", md: "3xl", lg: "4xl" }}
       >
-        Dojo Tasks
+        ThoughtSpace
       </Heading>
 
       <Spacer />
@@ -59,7 +59,11 @@ function Navbar() {
             </Text>
           </AvatarBadge>
         </Avatar>
-        <Text display={{ base: "none", sm: "block" }} color="textColor.50">
+        <Text
+          display={{ base: "none", sm: "block" }}
+          fontSize={{ base: "smaller", md: "medium" }}
+          color="textColor.50"
+        >
           {isLoggedIn ? user.name : "Guest"}
         </Text>
         <Button onClick={toggleTheme} bgColor="bgColor.200" color="primary.300">

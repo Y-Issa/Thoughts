@@ -2,7 +2,7 @@ import { Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import { useAuth } from "../contexts/AuthContext";
 
 import AccountTab from "../components/profile/AccountTab";
-import HistoryTab from "../components/profile/HistoryTab";
+import UserPostsTab from "../components/profile/UserPostsTab";
 import EmptyProfile from "../components/profile/EmptyProfile";
 
 function Profile() {
@@ -14,15 +14,13 @@ function Profile() {
         <Tab _selected={{ color: "white", bg: "primary.400" }}>
           Account Info
         </Tab>
-        <Tab _selected={{ color: "white", bg: "primary.400" }}>
-          Task History
-        </Tab>
+        <Tab _selected={{ color: "white", bg: "primary.400" }}>My Posts</Tab>
       </TabList>
 
       <TabPanels>
         <AccountTab user={user} />
 
-        <HistoryTab />
+        <UserPostsTab />
       </TabPanels>
     </Tabs>
   ) : (

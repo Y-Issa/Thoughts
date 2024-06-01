@@ -11,13 +11,41 @@ import { Form } from "react-router-dom";
 import CreateTagInput from "./CreateTagInput";
 import TagList from "./TagList";
 import { useState } from "react";
+import { useHttpClient } from "../../hooks/httpHook";
+import { useAuth } from "../../contexts/AuthContext";
 
 function CreateForm() {
+  const { fetchData, localError } = useHttpClient();
+  const { user } = useAuth();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const [tags, setTags] = useState([]);
   const [currentTag, setCurrentTag] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const responseData = await fetchData(
+        "http://localhost:8001/api/ideas/",
+        "POST",
+        JSON.stringify({
+          title,
+          description,
+          tags,
+          creator: user.id,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(user);
+      console.log(responseData);
+      console.log(localError.current);
+    } catch (err) {}
+  }
 
   function addTag() {
     if (currentTag === "" || currentTag.trim(" ") === "") {
@@ -32,7 +60,7 @@ function CreateForm() {
   }
   return (
     <Box maxW="450px" color="textColor.100" px="20px">
-      <Form method="post" action="/create">
+      <Form onSubmit={handleSubmit}>
         <FormControl isRequired mb="40px">
           <FormLabel>Task name:</FormLabel>
           <Input

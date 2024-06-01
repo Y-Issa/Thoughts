@@ -39,7 +39,7 @@ function UpdateInfoForm({ onClose }) {
       toast({
         title: localError.current ? localError.current : "Updated",
         description: localError.current
-          ? ""
+          ? "Please try again."
           : "Your information has been updated.",
         duration: 3000,
         position: "top",

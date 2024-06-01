@@ -27,10 +27,10 @@ function Dashboard() {
       <Box h="79vh" overflowY="scroll" css={scrollbarStyle}>
         <SimpleGrid spacing={10} minChildWidth="275px" px="25px">
           {ideas &&
-            ideas.ideas.map((task) => (
+            ideas.ideas.map((idea) => (
               <IdeaCard
-                key={task.id}
-                task={task}
+                key={idea.id}
+                idea={idea}
                 scrollbarStyle={scrollbarStyle}
               />
             ))}

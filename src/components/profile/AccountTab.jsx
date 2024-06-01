@@ -1,5 +1,5 @@
 import { TabPanel, List, ListItem, ListIcon } from "@chakra-ui/react";
-import { EmailIcon, ChatIcon, CalendarIcon, InfoIcon } from "@chakra-ui/icons";
+import { EmailIcon, ChatIcon, InfoIcon, TimeIcon } from "@chakra-ui/icons";
 import UpdateProfileInfo from "./UpdateProfileInfo";
 
 function AccountTab({ user }) {
@@ -16,12 +16,13 @@ function AccountTab({ user }) {
         </ListItem>
         <ListItem>
           <ListIcon as={ChatIcon} />
+          Bio:{" "}
           {user.bio
             ? user.bio
             : "Upload a bio. Just a few words about yourself. 🚀"}
         </ListItem>
         <ListItem>
-          <ListIcon as={CalendarIcon} />
+          <ListIcon as={TimeIcon} />
           Joined on: {new Date(user.joined).toLocaleDateString()}
         </ListItem>
         <ListItem>
