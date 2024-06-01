@@ -8,12 +8,14 @@ function StyledInput({
   onChange,
   isRequired,
   placeholder,
+  isDisabled,
 }) {
   return (
     <FormControl mb="25px">
       <FormLabel>{label}:</FormLabel>
       <Input
         isRequired={isRequired}
+        isDisabled={isDisabled}
         type={type}
         name={name}
         placeholder={placeholder}

@@ -2,13 +2,12 @@ import { Box, Button, HStack, Spacer, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import StyledInput from "./StyledInput";
+import StyledInput from "../StyledInput";
 import { useHttpClient } from "../../hooks/httpHook";
 
 function SignupForm() {
   const { toggleLoginMode, login } = useAuth();
-  const { isLoading, error, localError, fetchData, clearError } =
-    useHttpClient();
+  const { isLoading, localError, fetchData, clearError } = useHttpClient();
   const toast = useToast();
 
   const [name, setName] = useState("");
@@ -57,30 +56,33 @@ function SignupForm() {
         <StyledInput
           label="Name"
           type="input"
-          name={name}
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Name"
           isRequired={true}
+          isDisabled={isLoading}
         />
         <StyledInput
           label="Email"
           type="email"
-          name={email}
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           isRequired={true}
+          isDisabled={isLoading}
         />
 
         <StyledInput
           label="Password"
           type="password"
-          name={password}
+          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Password (min. 6 characters)"
           isRequired={true}
+          isDisabled={isLoading}
         />
 
         <HStack>
@@ -98,6 +100,7 @@ function SignupForm() {
             color="white"
             bgColor="primary.400"
             onClick={toggleLoginMode}
+            disabled={isLoading}
             _hover={{ bgColor: "primary.200" }}
           >
             Login?

@@ -10,17 +10,28 @@ import { Form } from "react-router-dom";
 
 import CreateTagInput from "./CreateTagInput";
 import TagList from "./TagList";
+import { useState } from "react";
 
-function CreateForm({
-  tags,
-  currentTag,
-  setCurrentTag,
-  addTag,
-  removeTag,
-  maxW,
-}) {
+function CreateForm() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [tags, setTags] = useState([]);
+  const [currentTag, setCurrentTag] = useState("");
+
+  function addTag() {
+    if (currentTag === "" || currentTag.trim(" ") === "") {
+      setCurrentTag("");
+      return;
+    }
+    setTags([...tags, currentTag]);
+    setCurrentTag("");
+  }
+  function removeTag(tag) {
+    setTags(tags.filter((t) => t !== tag));
+  }
   return (
-    <Box maxW={maxW} color="textColor.100" px="20px">
+    <Box maxW="450px" color="textColor.100" px="20px">
       <Form method="post" action="/create">
         <FormControl isRequired mb="40px">
           <FormLabel>Task name:</FormLabel>
@@ -30,6 +41,8 @@ function CreateForm({
             placeholder="Task name"
             focusBorderColor="primary.400"
             borderColor="textColor.800"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </FormControl>
 
@@ -41,6 +54,8 @@ function CreateForm({
             focusBorderColor="primary.400"
             borderColor="textColor.800"
             maxH="140px"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </FormControl>
 
@@ -53,7 +68,12 @@ function CreateForm({
           />
         </FormControl>
 
-        <Button color="textColor.400" bgColor="bgColor.400" type="submit">
+        <Button
+          color="textColor.400"
+          bgColor="bgColor.400"
+          type="submit"
+          _hover={{ bgColor: "bgColor.300" }}
+        >
           Submit
         </Button>
       </Form>

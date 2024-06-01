@@ -17,7 +17,12 @@ function CreateTagInput({ currentTag, setCurrentTag, addTag }) {
           }
         }}
       />
-      <Button bgColor="primary.400" color="white" onClick={addTag}>
+      <Button
+        bgColor="primary.400"
+        color="white"
+        onClick={addTag}
+        _hover={{ bgColor: "primary.300" }}
+      >
         Add tag
       </Button>
     </HStack>

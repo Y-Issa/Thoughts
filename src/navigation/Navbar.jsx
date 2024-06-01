@@ -17,7 +17,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Navbar() {
   const { isDark, toggleTheme } = useDarkMode();
-  const { isLoggedIn, logout, user } = useAuth();
+  const { user, isLoggedIn, logout } = useAuth();
 
   const toast = useToast();
 
@@ -62,7 +62,7 @@ function Navbar() {
         <Text display={{ base: "none", sm: "block" }} color="textColor.50">
           {isLoggedIn ? user.name : "Guest"}
         </Text>
-        <Button onClick={toggleTheme} bgColor="bgColor.400" color="primary.400">
+        <Button onClick={toggleTheme} bgColor="bgColor.200" color="primary.300">
           {isDark ? <SunIcon /> : <MoonIcon />}
         </Button>
         {isLoggedIn ? (

@@ -3,13 +3,12 @@ import { useState } from "react";
 import { Form } from "react-router-dom";
 import { useHttpClient } from "../../hooks/httpHook";
 import { useAuth } from "../../contexts/AuthContext";
-import StyledInput from "./StyledInput";
+import StyledInput from "../StyledInput";
 
 function LoginForm() {
   const toast = useToast();
 
-  const { isLoading, error, localError, fetchData, clearError } =
-    useHttpClient();
+  const { isLoading, localError, fetchData, clearError } = useHttpClient();
   const { login, toggleLoginMode } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -30,7 +29,6 @@ function LoginForm() {
         }
       );
       login(responseData.user.id, responseData.user);
-      console.log(responseData);
     } catch (err) {
     } finally {
       toast({
@@ -51,35 +49,27 @@ function LoginForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Box maxW="400px" px="20px" pb="10px">
-        {error && (
-          <Box
-            color="white"
-            bgColor="red.400"
-            p="10px"
-            borderRadius="5px"
-            mb="20px"
-          >
-            {error}
-          </Box>
-        )}
+        {}
         <StyledInput
           label="Email"
           type="email"
-          name={email}
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           isRequired={true}
+          isDisabled={isLoading}
         />
 
         <StyledInput
           label="Password"
           type="password"
-          name={password}
+          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           isRequired={true}
+          isDisabled={isLoading}
         />
 
         <HStack>

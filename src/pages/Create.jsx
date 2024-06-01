@@ -1,33 +1,8 @@
-import { useState } from "react";
 import { redirect } from "react-router-dom";
 import CreateForm from "../components/create/CreateForm";
 
 function Create() {
-  const [tags, setTags] = useState([]);
-  const [currentTag, setCurrentTag] = useState("");
-
-  function addTag() {
-    if (currentTag === "" || currentTag.trim(" ") === "") {
-      setCurrentTag("");
-      return;
-    }
-    setTags([...tags, currentTag]);
-    setCurrentTag("");
-  }
-  function removeTag(tag) {
-    setTags(tags.filter((t) => t !== tag));
-  }
-
-  return (
-    <CreateForm
-      tags={tags}
-      currentTag={currentTag}
-      setCurrentTag={setCurrentTag}
-      addTag={addTag}
-      removeTag={removeTag}
-      maxW="480px"
-    />
-  );
+  return <CreateForm />;
 }
 
 export async function createAction({ request }) {

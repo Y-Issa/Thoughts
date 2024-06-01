@@ -1,35 +1,15 @@
-import {
-  ChatIcon,
-  CheckCircleIcon,
-  EmailIcon,
-  StarIcon,
-} from "@chakra-ui/icons";
-import {
-  List,
-  ListIcon,
-  ListItem,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from "@chakra-ui/react";
+import { Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
+import AccountTab from "../components/profile/AccountTab";
+import HistoryTab from "../components/profile/HistoryTab";
+import EmptyProfile from "../components/profile/EmptyProfile";
 
 function Profile() {
-  const { isLoggedIn } = useAuth();
-  const navigate = useNavigate();
+  const { isLoggedIn, user } = useAuth();
 
-  useEffect(
-    function () {
-      if (!isLoggedIn) navigate("/");
-    },
-    [navigate, isLoggedIn]
-  );
-
-  return (
+  console.log(user);
+  return isLoggedIn ? (
     <Tabs mt="40p" p="20px" color="textColor.100" variant="enclosed">
       <TabList maxW="520px">
         <Tab _selected={{ color: "white", bg: "primary.400" }}>
@@ -41,33 +21,13 @@ function Profile() {
       </TabList>
 
       <TabPanels>
-        <TabPanel>
-          <List spacing={4}>
-            <ListItem>
-              <ListIcon as={EmailIcon} />
-              Email: mario@netninja.dev
-            </ListItem>
-            <ListItem>
-              <ListIcon as={ChatIcon} />
-              Lorem impsum dolor sit amet consectetur adipisicing elit.
-            </ListItem>
-            <ListItem>
-              <ListIcon as={StarIcon} />
-              Lorem impsum dolor sit amet consectetur.
-            </ListItem>
-          </List>
-        </TabPanel>
+        <AccountTab user={user} />
 
-        <TabPanel>
-          <List spacing={4}>
-            <ListItem>
-              <ListIcon as={CheckCircleIcon} color="teal.400" />
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </ListItem>
-          </List>
-        </TabPanel>
+        <HistoryTab />
       </TabPanels>
     </Tabs>
+  ) : (
+    <EmptyProfile />
   );
 }
 

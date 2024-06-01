@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, ViewIcon } from "@chakra-ui/icons";
 
-function TaskCard({ task, scrollbarStyle }) {
+function IdeaCard({ task, scrollbarStyle }) {
   return (
     <Card
       key={task.id}
@@ -66,4 +66,4 @@ function TaskCard({ task, scrollbarStyle }) {
   );
 }
 
-export default TaskCard;
+export default IdeaCard;

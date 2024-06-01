@@ -22,6 +22,7 @@ function AuthProvider({ children }) {
   const logout = useCallback(() => {
     setIsLoggedIn(false);
     setUserId(null);
+    setUser(null);
   }, []);
 
   function toggleLoginMode() {
