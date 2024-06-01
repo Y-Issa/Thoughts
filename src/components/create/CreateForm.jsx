@@ -20,7 +20,7 @@ function CreateForm({
   maxW,
 }) {
   return (
-    <Box maxW={maxW} color="textColor.100">
+    <Box maxW={maxW} color="textColor.100" px="20px">
       <Form method="post" action="/create">
         <FormControl isRequired mb="40px">
           <FormLabel>Task name:</FormLabel>
@@ -40,6 +40,7 @@ function CreateForm({
             placeholder="Enter a detailed description for the task..."
             focusBorderColor="primary.400"
             borderColor="textColor.800"
+            maxH="140px"
           />
         </FormControl>
 

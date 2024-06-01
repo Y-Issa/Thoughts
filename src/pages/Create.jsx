@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import CreateForm from "../components/form/CreateForm";
+import CreateForm from "../components/create/CreateForm";
 
 function Create() {
   const [tags, setTags] = useState([]);
   const [currentTag, setCurrentTag] = useState("");
 
   function addTag() {
-    if (!currentTag) return;
+    if (currentTag === "" || currentTag.trim(" ") === "") {
+      setCurrentTag("");
+      return;
+    }
     setTags([...tags, currentTag]);
     setCurrentTag("");
   }

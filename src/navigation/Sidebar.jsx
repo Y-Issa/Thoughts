@@ -6,7 +6,7 @@ function Sidebar() {
   return (
     <List
       color="textColor.50"
-      fontSize="1.2rem"
+      fontSize={{ base: "1.2rem", md: "1.5rem" }}
       display={{ base: "flex" }}
       flexDir={{ base: "row", md: "column" }}
       gap={5}

@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route index element={<Dashboard />} loader={tasksLoader} />
       <Route path="create" element={<Create />} action={createAction} />
       <Route path="profile" element={<Profile />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Route>
   )
 );

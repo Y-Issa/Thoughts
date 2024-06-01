@@ -22,7 +22,7 @@ function RootLayout() {
       <GridItem
         as="main"
         colSpan={{ base: 6, md: 4, lg: 4, xl: 5 }}
-        px="30px"
+        px="5px"
         py="25px"
         bg="bgColor.100"
         h={{ base: "100vh", md: "auto" }}

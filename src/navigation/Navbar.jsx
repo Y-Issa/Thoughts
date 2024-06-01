@@ -12,9 +12,12 @@ import {
 import DrawerLinks from "./DrawerLinks";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useDarkMode } from "../contexts/DarkModeContext";
+import LoginModal from "../components/Login/LoginModal";
+import { useAuth } from "../contexts/AuthContext";
 
 function Navbar() {
   const { isDark, toggleTheme } = useDarkMode();
+  const { isLoggedIn, logout, user } = useAuth();
 
   const toast = useToast();
 
@@ -31,7 +34,7 @@ function Navbar() {
   return (
     <Flex
       as="nav"
-      p={{ base: "2px", md: "10px" }}
+      p={{ base: "2px", md: "25px" }}
       mb="40px"
       alignItems="center"
       h="8vh"
@@ -57,14 +60,27 @@ function Navbar() {
           </AvatarBadge>
         </Avatar>
         <Text display={{ base: "none", sm: "block" }} color="textColor.50">
-          mario@netninja.dev
+          {isLoggedIn ? user.name : "Guest"}
         </Text>
         <Button onClick={toggleTheme} bgColor="bgColor.400" color="primary.400">
           {isDark ? <SunIcon /> : <MoonIcon />}
         </Button>
-        <Button bgColor="primary.400" color="white" onClick={showToast}>
-          Logout
-        </Button>
+        {isLoggedIn ? (
+          <Button
+            bgColor="primary.400"
+            color="white"
+            _hover={{ bgColor: "primary.300" }}
+            variant="ghost"
+            onClick={() => {
+              showToast();
+              logout();
+            }}
+          >
+            Logout
+          </Button>
+        ) : (
+          <LoginModal />
+        )}
       </HStack>
     </Flex>
   );

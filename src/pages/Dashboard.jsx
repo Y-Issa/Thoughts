@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 
 import TaskCard from "../components/dashboard/TaskCard";
@@ -17,27 +17,26 @@ const scrollbarStyle = {
 };
 
 function Dashboard() {
-  const tasks = useLoaderData(tasksLoader);
+  const { ideas } = useLoaderData(tasksLoader);
 
   return (
-    <SimpleGrid
-      spacing={10}
-      minChildWidth="275px"
-      overflowY="scroll"
-      h="77vh"
-      px="5px"
-      css={scrollbarStyle}
-    >
-      {tasks &&
-        tasks.map((task) => (
-          <TaskCard key={task.id} task={task} scrollbarStyle={scrollbarStyle} />
-        ))}
-    </SimpleGrid>
+    <Box h="79vh" overflowY="scroll" css={scrollbarStyle}>
+      <SimpleGrid spacing={10} minChildWidth="275px" px="25px">
+        {ideas &&
+          ideas.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              scrollbarStyle={scrollbarStyle}
+            />
+          ))}
+      </SimpleGrid>
+    </Box>
   );
 }
 
 export async function tasksLoader() {
-  const res = await fetch("http://localhost:3000/tasks");
+  const res = await fetch("http://localhost:8001/api/ideas/");
   return res.json();
 }
 

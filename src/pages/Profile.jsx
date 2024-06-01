@@ -14,8 +14,21 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Profile() {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(
+    function () {
+      if (!isLoggedIn) navigate("/");
+    },
+    [navigate, isLoggedIn]
+  );
+
   return (
     <Tabs mt="40p" p="20px" color="textColor.100" variant="enclosed">
       <TabList maxW="520px">

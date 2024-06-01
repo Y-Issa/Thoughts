@@ -22,6 +22,7 @@ function TaskCard({ task, scrollbarStyle }) {
       borderColor="primary.400"
       bg="bgColor.50"
       maxH="390px"
+      maxW={{ md: "581px" }}
     >
       <CardHeader>
         <Flex gap={5}>
