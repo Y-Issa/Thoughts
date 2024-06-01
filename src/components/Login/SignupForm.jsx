@@ -39,7 +39,6 @@ function SignupForm() {
           ? ""
           : "You have been signed up succefully.",
         duration: 3000,
-        isClosable: true,
         position: "top",
         variant: localError.current ? "left-accent" : "solid",
         status: localError.current ? "error" : "success",

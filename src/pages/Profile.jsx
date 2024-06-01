@@ -8,7 +8,6 @@ import EmptyProfile from "../components/profile/EmptyProfile";
 function Profile() {
   const { isLoggedIn, user } = useAuth();
 
-  console.log(user);
   return isLoggedIn ? (
     <Tabs mt="40p" p="20px" color="textColor.100" variant="enclosed">
       <TabList maxW="520px">

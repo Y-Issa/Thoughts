@@ -40,7 +40,7 @@ function UpdateProfileInfo() {
           <ModalHeader>Edit Account Info</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <UpdateInfoForm />
+            <UpdateInfoForm onClose={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>

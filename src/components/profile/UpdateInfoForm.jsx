@@ -1,35 +1,55 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useToast } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
 import StyledInput from "../StyledInput";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHttpClient } from "../../hooks/httpHook";
 
-function UpdateInfoForm() {
+function UpdateInfoForm({ onClose }) {
   const { user, login } = useAuth();
-  const { fetchData } = useHttpClient();
+  const { fetchData, localError } = useHttpClient();
+  const toast = useToast();
 
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
+  const [name, setName] = useState(user.name);
+  const [bio, setBio] = useState(user.bio);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
 
+    let responseData;
     try {
-      const responseData = await fetchData(
+      responseData = await fetchData(
         `http://localhost:8001/api/user/${user.id}`,
         "PATCH",
         JSON.stringify({
           name,
           bio,
+          oldPassword,
+          newPassword,
         }),
         {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData);
-      login(responseData.user.id, responseData.user);
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      onClose();
+      toast({
+        title: localError.current ? localError.current : "Updated",
+        description: localError.current
+          ? ""
+          : "Your information has been updated.",
+        duration: 3000,
+        position: "top",
+        variant: localError.current ? "left-accent" : "solid",
+        status: localError.current ? "error" : "success",
+      });
+      if (!localError.current) {
+        login(user.id, responseData.user);
+      }
+    }
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -45,10 +65,26 @@ function UpdateInfoForm() {
         <StyledInput
           label="Bio"
           type="input"
-          placeholder="Updated Bio"
+          placeholder="Updated Bio (optional)"
           name="bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
+        />
+        <StyledInput
+          label="Old Password"
+          type="password"
+          placeholder="Old Password (required)"
+          name="oldPassword"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+        />
+        <StyledInput
+          label="New Password"
+          type="password"
+          placeholder="New Password (optional)"
+          name="newPassword"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
         />
         <Button
           mb={0}
