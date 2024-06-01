@@ -1,27 +1,29 @@
 import { Box, Button, HStack, Spacer, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-router-dom";
-import { useHttpClient } from "../../hooks/httpHook";
 import { useAuth } from "../../contexts/AuthContext";
 import StyledInput from "./StyledInput";
+import { useHttpClient } from "../../hooks/httpHook";
 
-function LoginForm() {
-  const toast = useToast();
-
+function SignupForm() {
+  const { toggleLoginMode, login } = useAuth();
   const { isLoading, error, localError, fetchData, clearError } =
     useHttpClient();
-  const { login, toggleLoginMode } = useAuth();
+  const toast = useToast();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
       const responseData = await fetchData(
-        "http://localhost:8001/api/user/login",
+        "http://localhost:8001/api/user/signup",
         "POST",
         JSON.stringify({
+          name,
           email,
           password,
         }),
@@ -29,39 +31,38 @@ function LoginForm() {
           "Content-Type": "application/json",
         }
       );
-      login(responseData.user.id, responseData.user);
-      console.log(responseData);
+      login(responseData.userId, responseData.user);
     } catch (err) {
     } finally {
       toast({
-        title: localError.current ? localError.current : "Logged In",
+        title: localError.current ? localError.current : "Signed Up",
         description: localError.current
           ? ""
-          : "You have been logged in succefully.",
+          : "You have been signed up succefully.",
         duration: 3000,
+        isClosable: true,
         position: "top",
         variant: localError.current ? "left-accent" : "solid",
         status: localError.current ? "error" : "success",
       });
       localError.current = null;
       clearError();
+      toggleLoginMode();
     }
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <Box maxW="400px" px="20px" pb="10px">
-        {error && (
-          <Box
-            color="white"
-            bgColor="red.400"
-            p="10px"
-            borderRadius="5px"
-            mb="20px"
-          >
-            {error}
-          </Box>
-        )}
+        <StyledInput
+          label="Name"
+          type="input"
+          name={name}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          isRequired={true}
+        />
         <StyledInput
           label="Email"
           type="email"
@@ -90,17 +91,16 @@ function LoginForm() {
             disabled={isLoading}
             _hover={{ bgColor: "primary.200" }}
           >
-            Login
+            Signup
           </Button>
           <Spacer />
           <Button
             color="white"
             bgColor="primary.400"
             onClick={toggleLoginMode}
-            disabled={isLoading}
             _hover={{ bgColor: "primary.200" }}
           >
-            SignUp?
+            Login?
           </Button>
         </HStack>
       </Box>
@@ -108,4 +108,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SignupForm;

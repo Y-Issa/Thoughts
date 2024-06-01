@@ -9,6 +9,16 @@ const alert = {
         },
       };
     },
+    "left-accent": () => {
+      return {
+        container: {
+          borderLeft: "6px solid",
+          borderColor: "red.600",
+          bg: "red.50",
+          color: "red.600",
+        },
+      };
+    },
   },
 };
 

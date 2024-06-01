@@ -1,8 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export function useHttpClient() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const localError = useRef(null);
 
   const fetchData = useCallback(async function (
     url,
@@ -28,6 +29,7 @@ export function useHttpClient() {
       return responseData;
     } catch (err) {
       setError(err.message || "Something went wrong, please try again later.");
+      localError.current = err.message;
     } finally {
       setIsLoading(false);
     }
@@ -38,5 +40,5 @@ export function useHttpClient() {
     setError(null);
   }
 
-  return { isLoading, error, fetchData, clearError };
+  return { isLoading, error, localError, fetchData, clearError };
 }
