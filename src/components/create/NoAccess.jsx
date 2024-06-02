@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 
-function NoContent() {
+function NoAccess() {
   return (
     <Box
       m="30px"
@@ -15,14 +15,14 @@ function NoContent() {
         mb="20px"
         color="textColor.100"
       >
-        No content found.
+        Sign in to create an idea.
       </Heading>
       <Text fontSize="16px" color="textColor.100">
-        Be the first to create an idea! Sign up to get started and share your
-        ideas. 🚀
+        You need to be signed in to start creating! Let the world know about
+        your thoughts. 🚀
       </Text>
     </Box>
   );
 }
 
-export default NoContent;
+export default NoAccess;

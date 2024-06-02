@@ -17,7 +17,7 @@ import { useHttpClient } from "../../hooks/httpHook";
 import { useEffect, useState } from "react";
 
 function IdeaCard({ idea, scrollbarStyle }) {
-  const { fetchData, localError } = useHttpClient();
+  const { fetchData } = useHttpClient();
   const [owner, setOwner] = useState({});
 
   useEffect(

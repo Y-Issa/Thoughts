@@ -19,15 +19,14 @@ const scrollbarStyle = {
 
 function Dashboard() {
   const { ideas } = useLoaderData(ideasLoader);
-  console.log(ideas);
 
   return (
     <>
-      {ideas.ideas.length === 0 && <NoContent />}
+      {(!ideas?.ideas || ideas?.ideas?.length === 0) && <NoContent />}
       <Box h="79vh" overflowY="scroll" css={scrollbarStyle}>
         <SimpleGrid spacing={10} minChildWidth="275px" px="25px">
           {ideas &&
-            ideas.ideas.map((idea) => (
+            ideas?.ideas?.map((idea) => (
               <IdeaCard
                 key={idea.id}
                 idea={idea}

@@ -10,7 +10,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import RootLayout from "./layouts/RootLayout";
 import Profile from "./pages/Profile";
 import Dashboard, { ideasLoader } from "./pages/Dashboard";
-import Create, { createAction } from "./pages/Create";
+import Create from "./pages/Create";
 import { theme_dark, theme_light } from "./theme";
 import { useDarkMode } from "./contexts/DarkModeContext";
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Dashboard />} loader={ideasLoader} />
-      <Route path="create" element={<Create />} action={createAction} />
+      <Route path="create" element={<Create />} />
       <Route path="profile" element={<Profile />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Route>

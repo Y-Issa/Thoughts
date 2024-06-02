@@ -1,22 +1,11 @@
-import { redirect } from "react-router-dom";
 import CreateForm from "../components/create/CreateForm";
+import NoAccess from "../components/create/NoAccess";
+import { useAuth } from "../contexts/AuthContext";
 
 function Create() {
-  return <CreateForm />;
-}
+  const { isLoggedIn } = useAuth();
 
-export async function createAction({ request }) {
-  const data = await request.formData();
-
-  const task = {
-    title: data.get("title"),
-    description: data.get("description"),
-    tags: data.getAll("tags"),
-  };
-
-  console.log(task);
-
-  return redirect("/");
+  return <>{isLoggedIn ? <CreateForm /> : <NoAccess />}</>;
 }
 
 export default Create;

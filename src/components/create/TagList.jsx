@@ -12,13 +12,13 @@ function TagList({ tags, removeTag }) {
     <HStack spacing={4} mb="15px" flexWrap="wrap">
       <FormLabel my="10px">Tags:</FormLabel>
       {tags.map((tag) => (
-        <>
-          <Input type="hidden" name="tags" value={tag} key={`${tag}-hidden`} />
-          <Tag key={tag} size="lg" variant="subtle" colorScheme="purple">
+        <div key={tag}>
+          <Input type="hidden" name="tags" value={tag} />
+          <Tag size="lg" variant="subtle" colorScheme="purple">
             <TagLabel py="5px">{tag}</TagLabel>
             <TagCloseButton onClick={() => removeTag(tag)} />
           </Tag>
-        </>
+        </div>
       ))}
     </HStack>
   );

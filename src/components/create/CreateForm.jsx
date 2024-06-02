@@ -5,8 +5,9 @@ import {
   FormLabel,
   Input,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 import CreateTagInput from "./CreateTagInput";
 import TagList from "./TagList";
@@ -15,6 +16,9 @@ import { useHttpClient } from "../../hooks/httpHook";
 import { useAuth } from "../../contexts/AuthContext";
 
 function CreateForm() {
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const { fetchData, localError } = useHttpClient();
   const { user } = useAuth();
 
@@ -28,7 +32,7 @@ function CreateForm() {
     e.preventDefault();
 
     try {
-      const responseData = await fetchData(
+      await fetchData(
         "http://localhost:8001/api/ideas/",
         "POST",
         JSON.stringify({
@@ -41,10 +45,21 @@ function CreateForm() {
           "Content-Type": "application/json",
         }
       );
-      console.log(user);
-      console.log(responseData);
-      console.log(localError.current);
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      toast({
+        title: localError.current ? localError.current : "Idea Created",
+        description: localError.current
+          ? ""
+          : "You have created a idea successfully.",
+        duration: 3000,
+        position: "top",
+        variant: localError.current ? "left-accent" : "solid",
+        status: localError.current ? "error" : "success",
+      });
+      if (!localError.current) navigate("/");
+      localError.current = null;
+    }
   }
 
   function addTag() {
@@ -61,24 +76,25 @@ function CreateForm() {
   return (
     <Box maxW="450px" color="textColor.100" px="20px">
       <Form onSubmit={handleSubmit}>
-        <FormControl isRequired mb="40px">
-          <FormLabel>Task name:</FormLabel>
+        <FormControl mb="40px">
+          <FormLabel>Idea:</FormLabel>
           <Input
             type="text"
-            name="title"
-            placeholder="Task name"
+            name="idea"
+            placeholder="Idea name"
             focusBorderColor="primary.400"
             borderColor="textColor.800"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            isRequired
           />
         </FormControl>
 
         <FormControl mb="40px">
-          <FormLabel>Task description:</FormLabel>
+          <FormLabel>Idea description:</FormLabel>
           <Textarea
             name="description"
-            placeholder="Enter a detailed description for the task..."
+            placeholder="Enter a detailed description for the idea..."
             focusBorderColor="primary.400"
             borderColor="textColor.800"
             maxH="140px"

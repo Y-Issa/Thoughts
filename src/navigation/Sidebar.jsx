@@ -20,7 +20,7 @@ function Sidebar() {
       <ListItem>
         <NavLink to="/create">
           <ListIcon as={EditIcon} />
-          New Task
+          New Idea
         </NavLink>
       </ListItem>
       <ListItem>
