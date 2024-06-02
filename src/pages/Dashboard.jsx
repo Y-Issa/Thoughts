@@ -19,6 +19,7 @@ const scrollbarStyle = {
 
 function Dashboard() {
   const { ideas } = useLoaderData(ideasLoader);
+  console.log(ideas.ideas[0].creator);
 
   return (
     <>

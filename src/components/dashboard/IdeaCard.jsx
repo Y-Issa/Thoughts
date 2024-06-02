@@ -13,29 +13,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { EditIcon, ViewIcon } from "@chakra-ui/icons";
-import { useHttpClient } from "../../hooks/httpHook";
-import { useEffect, useState } from "react";
 
 function IdeaCard({ idea, scrollbarStyle }) {
-  const { fetchData } = useHttpClient();
-  const [owner, setOwner] = useState({});
-
-  useEffect(
-    function () {
-      async function fetchUser() {
-        try {
-          const responseData = await fetchData(
-            `http://localhost:8001/api/user/${idea.creator}`,
-            "GET"
-          );
-          setOwner(responseData.user);
-        } catch {}
-      }
-      fetchUser();
-    },
-    [fetchData, idea.creator]
-  );
-
   return (
     <Card
       key={idea.id}
@@ -43,7 +22,7 @@ function IdeaCard({ idea, scrollbarStyle }) {
       borderColor="primary.400"
       bg="bgColor.50"
       maxH="390px"
-      maxW={{ md: "748px" }}
+      maxW={{ md: "581px" }}
     >
       <CardHeader>
         <Flex gap={5}>
@@ -52,7 +31,7 @@ function IdeaCard({ idea, scrollbarStyle }) {
             <Heading as="h3" size="sm">
               {idea.title}
             </Heading>
-            <Text>by {owner.name}</Text>
+            <Text>by {idea.creator.name}</Text>
           </Box>
         </Flex>
       </CardHeader>

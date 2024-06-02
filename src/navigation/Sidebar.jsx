@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function Sidebar() {
   return (
     <List
-      color="textColor.50"
+      color={{ base: "white", md: "textColor.50" }}
       fontSize={{ base: "1.2rem", md: "1.5rem" }}
       display={{ base: "flex" }}
       flexDir={{ base: "row", md: "column" }}
