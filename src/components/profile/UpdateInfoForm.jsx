@@ -1,56 +1,23 @@
-import { Box, Button, useToast } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
 import StyledInput from "../StyledInput";
-import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHttpClient } from "../../hooks/httpHook";
+
+import useUpdateInfo from "../../hooks/useUpdateInfo";
 
 function UpdateInfoForm({ onClose }) {
-  const { user, login } = useAuth();
-  const { fetchData, localError } = useHttpClient();
-  const toast = useToast();
+  const {
+    name,
+    setName,
+    bio,
+    setBio,
+    oldPassword,
+    setOldPassword,
+    newPassword,
+    setNewPassword,
+    handleSubmit,
+    isLoading,
+  } = useUpdateInfo(onClose);
 
-  const [name, setName] = useState(user.name);
-  const [bio, setBio] = useState(user.bio);
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    let responseData;
-    try {
-      responseData = await fetchData(
-        `http://localhost:8001/api/user/${user.id}`,
-        "PATCH",
-        JSON.stringify({
-          name,
-          bio,
-          oldPassword,
-          newPassword,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-    } catch (err) {
-    } finally {
-      onClose();
-      toast({
-        title: localError.current ? localError.current : "Updated",
-        description: localError.current
-          ? "Please try again."
-          : "Your information has been updated.",
-        duration: 3000,
-        position: "top",
-        variant: localError.current ? "left-accent" : "solid",
-        status: localError.current ? "error" : "success",
-      });
-      if (!localError.current) {
-        login(user.id, responseData.user);
-      }
-    }
-  }
   return (
     <Form onSubmit={handleSubmit}>
       <Box px="30px" pb="15px">
@@ -90,8 +57,9 @@ function UpdateInfoForm({ onClose }) {
           mb={0}
           color="white"
           bgColor="primary.400"
-          type="submit"
           _hover={{ bgColor: "primary.200" }}
+          type="submit"
+          disabled={isLoading}
         >
           Update
         </Button>

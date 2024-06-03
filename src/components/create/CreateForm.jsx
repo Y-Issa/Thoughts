@@ -5,74 +5,29 @@ import {
   FormLabel,
   Input,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
-import { Form, useNavigate } from "react-router-dom";
+import { Form } from "react-router-dom";
 
 import CreateTagInput from "./CreateTagInput";
 import TagList from "./TagList";
-import { useState } from "react";
-import { useHttpClient } from "../../hooks/httpHook";
-import { useAuth } from "../../contexts/AuthContext";
+
+import useCreateIdea from "../../hooks/useCreateIdea";
 
 function CreateForm() {
-  const toast = useToast();
-  const navigate = useNavigate();
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    tags,
+    currentTag,
+    setCurrentTag,
+    handleSubmit,
+    addTag,
+    removeTag,
+    isLoading,
+  } = useCreateIdea();
 
-  const { fetchData, localError } = useHttpClient();
-  const { user } = useAuth();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const [tags, setTags] = useState([]);
-  const [currentTag, setCurrentTag] = useState("");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      await fetchData(
-        "http://localhost:8001/api/ideas/",
-        "POST",
-        JSON.stringify({
-          title,
-          description,
-          tags,
-          creator: user.id,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-    } catch (err) {
-    } finally {
-      toast({
-        title: localError.current ? localError.current : "Idea Created",
-        description: localError.current
-          ? ""
-          : "You have created a idea successfully.",
-        duration: 3000,
-        position: "top",
-        variant: localError.current ? "left-accent" : "solid",
-        status: localError.current ? "error" : "success",
-      });
-      if (!localError.current) navigate("/");
-      localError.current = null;
-    }
-  }
-
-  function addTag() {
-    if (currentTag === "" || currentTag.trim(" ") === "") {
-      setCurrentTag("");
-      return;
-    }
-    setTags([...tags, currentTag]);
-    setCurrentTag("");
-  }
-  function removeTag(tag) {
-    setTags(tags.filter((t) => t !== tag));
-  }
   return (
     <Box maxW="450px" color="textColor.100" px="20px">
       <Form onSubmit={handleSubmit}>
@@ -100,6 +55,7 @@ function CreateForm() {
             maxH="140px"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            isRequired
           />
         </FormControl>
 
@@ -113,6 +69,7 @@ function CreateForm() {
         </FormControl>
 
         <Button
+          disabled={isLoading}
           color="textColor.400"
           bgColor="bgColor.400"
           type="submit"

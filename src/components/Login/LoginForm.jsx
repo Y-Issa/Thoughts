@@ -1,50 +1,19 @@
-import { Box, Button, HStack, Spacer, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, HStack, Spacer } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { useHttpClient } from "../../hooks/httpHook";
-import { useAuth } from "../../contexts/AuthContext";
+
 import StyledInput from "../StyledInput";
+import useLogin from "../../hooks/useLogin";
 
 function LoginForm() {
-  const toast = useToast();
-
-  const { isLoading, localError, fetchData, clearError } = useHttpClient();
-  const { login, toggleLoginMode } = useAuth();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const responseData = await fetchData(
-        "http://localhost:8001/api/user/login",
-        "POST",
-        JSON.stringify({
-          email,
-          password,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      login(responseData.user.id, responseData.user);
-    } catch (err) {
-    } finally {
-      toast({
-        title: localError.current ? localError.current : "Logged In",
-        description: localError.current
-          ? ""
-          : "You have been logged in succefully.",
-        duration: 3000,
-        position: "top",
-        variant: localError.current ? "left-accent" : "solid",
-        status: localError.current ? "error" : "success",
-      });
-      localError.current = null;
-      clearError();
-    }
-  }
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    isLoading,
+    handleSubmit,
+    toggleLoginMode,
+  } = useLogin();
 
   return (
     <Form onSubmit={handleSubmit}>

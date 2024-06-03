@@ -1,6 +1,8 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
+import { useAuth } from "../../contexts/AuthContext";
 
 function NoContent() {
+  const { isLoggedIn } = useAuth();
   return (
     <Box
       m="30px"
@@ -18,8 +20,8 @@ function NoContent() {
         No content found.
       </Heading>
       <Text fontSize="16px" color="textColor.100">
-        Be the first to create an idea! Sign up to get started and share your
-        ideas. 🚀
+        Be the first to create an idea!{" "}
+        {!isLoggedIn && "Sign up to get started and share your ideas."} 🚀
       </Text>
     </Box>
   );

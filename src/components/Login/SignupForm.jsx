@@ -1,53 +1,20 @@
-import { Box, Button, HStack, Spacer, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, HStack, Spacer } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
 import StyledInput from "../StyledInput";
-import { useHttpClient } from "../../hooks/httpHook";
+import useSignup from "../../hooks/useSignup";
 
 function SignupForm() {
-  const { toggleLoginMode, login } = useAuth();
-  const { isLoading, localError, fetchData, clearError } = useHttpClient();
-  const toast = useToast();
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    try {
-      const responseData = await fetchData(
-        "http://localhost:8001/api/user/signup",
-        "POST",
-        JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      login(responseData.userId, responseData.user);
-    } catch (err) {
-    } finally {
-      toast({
-        title: localError.current ? localError.current : "Signed Up",
-        description: localError.current
-          ? ""
-          : "You have been signed up succefully.",
-        duration: 3000,
-        position: "top",
-        variant: localError.current ? "left-accent" : "solid",
-        status: localError.current ? "error" : "success",
-      });
-      localError.current = null;
-      clearError();
-      toggleLoginMode();
-    }
-  }
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    isLoading,
+    handleSubmit,
+    toggleLoginMode,
+  } = useSignup();
 
   return (
     <Form onSubmit={handleSubmit}>

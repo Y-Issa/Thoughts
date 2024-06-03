@@ -10,11 +10,12 @@ import {
   Flex,
   HStack,
   Heading,
+  Spacer,
   Text,
 } from "@chakra-ui/react";
-import { EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
 
-function IdeaCard({ idea, scrollbarStyle }) {
+function IdeaCard({ idea, canBeDeleted, onDelete }) {
   return (
     <Card
       key={idea.id}
@@ -33,10 +34,38 @@ function IdeaCard({ idea, scrollbarStyle }) {
             </Heading>
             <Text>by {idea.creator.name}</Text>
           </Box>
+          {canBeDeleted && (
+            <>
+              <Spacer />
+              <Button
+                variant="ghost"
+                color="textColor.200"
+                _hover={{ bg: "bgColor.200" }}
+                onClick={() => onDelete(idea.id)}
+              >
+                <DeleteIcon />
+              </Button>
+            </>
+          )}
         </Flex>
       </CardHeader>
 
-      <CardBody color="textColor.300" overflowY="scroll" css={scrollbarStyle}>
+      <CardBody
+        color="textColor.300"
+        overflowY="scroll"
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "lightgray",
+            borderRadius: "24px",
+          },
+        }}
+      >
         <Text>{idea.description}</Text>
       </CardBody>
 

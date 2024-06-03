@@ -66,7 +66,7 @@ function Navbar() {
         >
           {isLoggedIn ? user.name : "Guest"}
         </Text>
-        <Button onClick={toggleTheme} bgColor="bgColor.200" color="primary.300">
+        <Button onClick={toggleTheme} bgColor="bgColor.200" color="primary.200">
           {isDark ? <SunIcon /> : <MoonIcon />}
         </Button>
         {isLoggedIn ? (

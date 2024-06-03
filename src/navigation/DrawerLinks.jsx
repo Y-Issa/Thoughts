@@ -2,6 +2,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Button,
   Drawer,
+  DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
@@ -33,7 +34,7 @@ function DrawerLinks() {
       >
         <DrawerOverlay />
         <DrawerContent bg="primary.400">
-          {/* <DrawerCloseButton color="white" /> */}
+          <DrawerCloseButton color="white" />
           <DrawerHeader>
             <Button variant="unstyled" onClick={onClose}>
               <Sidebar />

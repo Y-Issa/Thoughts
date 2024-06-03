@@ -1,15 +1,10 @@
-import { TabPanel, List, ListItem, ListIcon } from "@chakra-ui/react";
-import { CheckCircleIcon } from "@chakra-ui/icons";
+import { TabPanel } from "@chakra-ui/react";
+import UserPosts from "./UserPosts";
 
 function UserPostsTab() {
   return (
-    <TabPanel>
-      <List spacing={4}>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="teal.400" />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </ListItem>
-      </List>
+    <TabPanel px={0}>
+      <UserPosts />
     </TabPanel>
   );
 }
