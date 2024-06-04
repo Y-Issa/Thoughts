@@ -47,7 +47,8 @@ function useUpdateInfo(onClose) {
       if (!localError.current) {
         onClose();
 
-        login(user.id, responseData.user);
+        login(user.id, responseData.user, responseData.token);
+        console.log(responseData);
       }
       localError.current = null;
     }

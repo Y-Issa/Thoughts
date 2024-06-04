@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useReducer } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -22,6 +28,7 @@ function authReducer(state, action) {
         isLoggedIn: true,
         userId: action.payload.userId,
         user: action.payload.user,
+        token: action.payload.token,
       };
     case "LOGOUT":
       return {
@@ -41,14 +48,30 @@ function authReducer(state, action) {
 }
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const { isLoggedIn, userId, user, isLoginMode } = state;
+  const { isLoggedIn, userId, user, isLoginMode, token } = state;
 
-  const login = useCallback((userId, user) => {
-    dispatch({ type: "LOGIN", payload: { userId, user } });
+  useEffect(function () {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          userId: storedUser.user.id,
+          user: storedUser.user,
+          token: storedUser.token,
+        },
+      });
+    }
+  }, []);
+
+  const login = useCallback((userId, user, token) => {
+    dispatch({ type: "LOGIN", payload: { userId, user, token } });
   }, []);
 
   const logout = useCallback(() => {
     dispatch({ type: "LOGOUT" });
+    localStorage.removeItem("user");
   }, []);
 
   function toggleLoginMode() {
@@ -65,6 +88,7 @@ function AuthProvider({ children }) {
         user,
         isLoginMode,
         toggleLoginMode,
+        token,
       }}
     >
       {children}

@@ -13,7 +13,8 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { EditIcon, ViewIcon } from "@chakra-ui/icons";
+import ConfirmDeleteModal from "../profile/ConfirmDeleteModal";
 
 function IdeaCard({ idea, canBeDeleted, onDelete }) {
   return (
@@ -37,14 +38,7 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
           {canBeDeleted && (
             <>
               <Spacer />
-              <Button
-                variant="ghost"
-                color="textColor.200"
-                _hover={{ bg: "bgColor.200" }}
-                onClick={() => onDelete(idea.id)}
-              >
-                <DeleteIcon />
-              </Button>
+              <ConfirmDeleteModal onDelete={onDelete} idea={idea} />
             </>
           )}
         </Flex>

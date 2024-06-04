@@ -8,7 +8,7 @@ function useCreateIdea() {
   const toast = useToast();
   const navigate = useNavigate();
   const { fetchData, localError, isLoading } = useHttpClient();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -18,6 +18,9 @@ function useCreateIdea() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (token === null) {
+      return;
+    }
     try {
       await fetchData(
         "http://localhost:8001/api/ideas/",
@@ -30,8 +33,11 @@ function useCreateIdea() {
         }),
         {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         }
       );
+
+      console.log(token);
     } catch (err) {
       // error handled in the httpHook
     } finally {

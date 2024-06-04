@@ -1,9 +1,11 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import IdeaCard from "../dashboard/IdeaCard";
-import useUserPosts from "../../hooks/getUserPosts";
+import useUserPosts from "../../hooks/useUserPosts";
+import NoUserPostsYet from "./NoUserPostsYet";
 
 function UserPosts() {
-  const { loadedIdeas, error } = useUserPosts();
+  const { loadedIdeas, handleDelete } = useUserPosts();
+  console.log(loadedIdeas);
 
   return (
     <Box
@@ -23,11 +25,23 @@ function UserPosts() {
         },
       }}
     >
-      <SimpleGrid spacing={10} minChildWidth="275px" px="25px">
-        {loadedIdeas &&
+      <SimpleGrid
+        spacing={10}
+        minChildWidth="275px"
+        px={{ base: "5px", md: "25px" }}
+      >
+        {loadedIdeas.length > 0 ? (
           loadedIdeas?.map((idea) => (
-            <IdeaCard key={idea.id} idea={idea} canBeDeleted={true} />
-          ))}
+            <IdeaCard
+              key={idea.id}
+              idea={idea}
+              canBeDeleted={true}
+              onDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <NoUserPostsYet />
+        )}
       </SimpleGrid>
     </Box>
   );

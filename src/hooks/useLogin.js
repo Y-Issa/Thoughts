@@ -25,7 +25,11 @@ function useLogin() {
           "Content-Type": "application/json",
         }
       );
-      login(responseData.user.id, responseData.user);
+      console.log(responseData);
+      login(responseData.user.id, responseData.user, responseData.token);
+      if (!localError.current) {
+        localStorage.setItem("user", JSON.stringify(responseData));
+      }
     } catch (err) {
       // error handled in the httpHook
     } finally {

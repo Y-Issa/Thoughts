@@ -37,7 +37,7 @@ function UpdateProfileInfo() {
       >
         <ModalOverlay />
         <ModalContent bgColor="bgColor.100" color="textColor.100">
-          <ModalHeader>Edit Account Info</ModalHeader>
+          <ModalHeader fontSize="24px">Edit Account Info</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <UpdateInfoForm onClose={onClose} />

@@ -20,7 +20,7 @@ function UpdateInfoForm({ onClose }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Box px="30px" pb="15px">
+      <Box px="30px" py="15px">
         <StyledInput
           label="Name"
           type="input"

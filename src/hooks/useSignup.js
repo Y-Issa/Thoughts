@@ -28,7 +28,12 @@ function useSignup() {
           "Content-Type": "application/json",
         }
       );
-      login(responseData.userId, responseData.user);
+      login(responseData.user.id, responseData.user, responseData.token);
+      console.log(responseData);
+
+      if (!localError.current) {
+        localStorage.setItem("user", JSON.stringify(responseData));
+      }
     } catch (err) {
       // error handled in the httpHook
     } finally {
@@ -42,6 +47,7 @@ function useSignup() {
         variant: localError.current ? "left-accent" : "solid",
         status: localError.current ? "error" : "success",
       });
+
       localError.current = null;
       toggleLoginMode();
     }
