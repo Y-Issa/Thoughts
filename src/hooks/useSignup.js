@@ -29,7 +29,6 @@ function useSignup() {
         }
       );
       login(responseData.user.id, responseData.user, responseData.token);
-      console.log(responseData);
 
       if (!localError.current) {
         localStorage.setItem("user", JSON.stringify(responseData));

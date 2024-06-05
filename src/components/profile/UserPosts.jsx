@@ -5,7 +5,6 @@ import NoUserPostsYet from "./NoUserPostsYet";
 
 function UserPosts() {
   const { loadedIdeas, handleDelete } = useUserPosts();
-  console.log(loadedIdeas);
 
   return (
     <Box

@@ -36,8 +36,6 @@ function useCreateIdea() {
           Authorization: `Bearer ${token}`,
         }
       );
-
-      console.log(token);
     } catch (err) {
       // error handled in the httpHook
     } finally {
@@ -57,7 +55,11 @@ function useCreateIdea() {
   }
 
   function addTag() {
-    if (currentTag === "" || currentTag.trim() === "") {
+    if (
+      currentTag === "" ||
+      currentTag.trim() === "" ||
+      tags.includes(currentTag)
+    ) {
       setCurrentTag("");
       return;
     }

@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 function useUserPosts() {
   const toast = useToast();
 
-  const { userId } = useAuth();
+  const { userId, token } = useAuth();
   const { fetchData, localError } = useHttpClient();
 
   const [loadedIdeas, setLoadedIdeas] = useState([]);
@@ -31,7 +31,9 @@ function useUserPosts() {
 
   async function handleDelete(id) {
     try {
-      await fetchData(`http://localhost:8001/api/ideas/${id}`, "DELETE");
+      await fetchData(`http://localhost:8001/api/ideas/${id}`, "DELETE", null, {
+        Authorization: `Bearer ${token}`,
+      });
     } catch (err) {
       setError(err);
     } finally {

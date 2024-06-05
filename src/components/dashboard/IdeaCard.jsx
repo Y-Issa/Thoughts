@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon, ViewIcon } from "@chakra-ui/icons";
 import ConfirmDeleteModal from "../profile/ConfirmDeleteModal";
+import TagsDisplay from "./TagsDisplay";
 
 function IdeaCard({ idea, canBeDeleted, onDelete }) {
   return (
@@ -47,6 +48,9 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
       <CardBody
         color="textColor.300"
         overflowY="scroll"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
         css={{
           "&::-webkit-scrollbar": {
             width: "4px",
@@ -60,7 +64,8 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
           },
         }}
       >
-        <Text>{idea.description}</Text>
+        <Text mb={4}>{idea.description}</Text>
+        <TagsDisplay tags={idea.tags} />
       </CardBody>
 
       <Divider borderColor="textColor.900" />
