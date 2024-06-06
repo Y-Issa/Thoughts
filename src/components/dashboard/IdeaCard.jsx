@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -13,10 +12,10 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons";
 import ConfirmDeleteModal from "../profile/ConfirmDeleteModal";
 import TagsDisplay from "./TagsDisplay";
 import CommentPopover from "./CommentPopover";
+import ViewDetails from "./ViewDetails";
 
 function IdeaCard({ idea, canBeDeleted, onDelete }) {
   return (
@@ -69,7 +68,11 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
             },
           }}
         >
-          <Text>{idea.description}</Text>
+          <Text>
+            {idea.description.length > 180
+              ? idea.description.substring(0, 180) + "..."
+              : idea.description}
+          </Text>
         </Box>
         <TagsDisplay tags={idea.tags} />
       </CardBody>
@@ -78,14 +81,7 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
 
       <CardFooter>
         <HStack>
-          <Button
-            variant="ghost"
-            color="textColor.200"
-            leftIcon={<ViewIcon />}
-            _hover={{ bg: "bgColor.200" }}
-          >
-            Watch
-          </Button>
+          <ViewDetails idea={idea} />
           <CommentPopover ideaId={idea.id} />
         </HStack>
       </CardFooter>
