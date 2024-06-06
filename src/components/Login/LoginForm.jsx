@@ -18,7 +18,6 @@ function LoginForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Box maxW="400px" px="20px" pb="10px">
-        {}
         <StyledInput
           label="Email"
           type="email"

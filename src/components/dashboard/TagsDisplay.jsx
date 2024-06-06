@@ -25,6 +25,7 @@ function TagsDisplay({ tags }) {
             variant="subtle"
             bgColor="primary.200"
             color="textColor.100"
+            _hover={{ bgColor: "primary.300", color: "textColor.200" }}
           >
             <TagLabel py="5px">{tag}</TagLabel>
           </Tag>

@@ -25,6 +25,7 @@ function useLogin() {
           "Content-Type": "application/json",
         }
       );
+      console.log(responseData);
       login(responseData.user.id, responseData.user, responseData.token);
       if (!localError.current) {
         localStorage.setItem("user", JSON.stringify(responseData));

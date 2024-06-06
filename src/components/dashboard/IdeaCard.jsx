@@ -13,9 +13,10 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { ViewIcon } from "@chakra-ui/icons";
 import ConfirmDeleteModal from "../profile/ConfirmDeleteModal";
 import TagsDisplay from "./TagsDisplay";
+import CommentPopover from "./CommentPopover";
 
 function IdeaCard({ idea, canBeDeleted, onDelete }) {
   return (
@@ -47,24 +48,29 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
 
       <CardBody
         color="textColor.300"
-        overflowY="scroll"
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        css={{
-          "&::-webkit-scrollbar": {
-            width: "4px",
-          },
-          "&::-webkit-scrollbar-track": {
-            width: "6px",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "lightgray",
-            borderRadius: "24px",
-          },
-        }}
+        maxH="210px"
       >
-        <Text mb={4}>{idea.description}</Text>
+        <Box
+          mb={4}
+          overflowY="scroll"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "6px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "lightgray",
+              borderRadius: "24px",
+            },
+          }}
+        >
+          <Text>{idea.description}</Text>
+        </Box>
         <TagsDisplay tags={idea.tags} />
       </CardBody>
 
@@ -80,14 +86,7 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
           >
             Watch
           </Button>
-          <Button
-            variant="ghost"
-            color="textColor.200"
-            leftIcon={<EditIcon />}
-            _hover={{ bg: "bgColor.200" }}
-          >
-            Comment
-          </Button>
+          <CommentPopover ideaId={idea.id} />
         </HStack>
       </CardFooter>
     </Card>
