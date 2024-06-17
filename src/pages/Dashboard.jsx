@@ -1,5 +1,5 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import { useLoaderData } from "react-router-dom";
+import { Box, SimpleGrid, Spinner, Center } from "@chakra-ui/react";
+import { useLoaderData, useNavigation } from "react-router-dom";
 
 import IdeaCard from "../components/dashboard/IdeaCard";
 import NoContent from "../components/dashboard/NoContent";
@@ -19,6 +19,15 @@ const scrollbarStyle = {
 
 function Dashboard() {
   const { ideas } = useLoaderData(ideasLoader);
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return (
+      <Center h="79vh">
+        <Spinner size="xl" color="primary.400" />
+      </Center>
+    );
+  }
 
   return (
     <>
