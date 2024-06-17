@@ -1,7 +1,6 @@
 import {
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Divider,
   HStack,
@@ -28,8 +27,6 @@ function CommentBox({ comment }) {
       </CardHeader>
       <Divider borderColor="textColor.800" />
       <CardBody>{comment?.content}</CardBody>
-
-      <CardFooter fontSize="12px" color="textColor.200"></CardFooter>
     </Card>
   );
 }

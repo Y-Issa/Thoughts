@@ -17,7 +17,7 @@ function useSignup() {
 
     try {
       const responseData = await fetchData(
-        "http://localhost:8001/api/user/signup",
+        "https://thoughts-backend-4tsi.onrender.com/api/user/signup",
         "POST",
         JSON.stringify({
           name,

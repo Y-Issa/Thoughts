@@ -19,7 +19,7 @@ function useUpdateInfo(onClose) {
     let responseData;
     try {
       responseData = await fetchData(
-        `http://localhost:8001/api/user/${user.id}`,
+        `https://thoughts-backend-4tsi.onrender.com/api/user/${user.id}`,
         "PATCH",
         JSON.stringify({
           name,

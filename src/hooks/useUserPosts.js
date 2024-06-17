@@ -17,7 +17,7 @@ function useUserPosts() {
       async function fetchPosts() {
         try {
           const responseData = await fetchData(
-            `http://localhost:8001/api/ideas/user/${userId}`
+            `https://thoughts-backend-4tsi.onrender.com/api/ideas/user/${userId}`
           );
           setLoadedIdeas(responseData.ideas);
         } catch (err) {
@@ -31,9 +31,14 @@ function useUserPosts() {
 
   async function handleDelete(id) {
     try {
-      await fetchData(`http://localhost:8001/api/ideas/${id}`, "DELETE", null, {
-        Authorization: `Bearer ${token}`,
-      });
+      await fetchData(
+        `https://thoughts-backend-4tsi.onrender.com/api/ideas/${id}`,
+        "DELETE",
+        null,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
     } catch (err) {
       setError(err);
     } finally {

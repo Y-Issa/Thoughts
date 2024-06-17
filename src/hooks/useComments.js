@@ -20,7 +20,7 @@ export function useComments(idea) {
 
     try {
       const responseData = await fetchData(
-        `http://localhost:8001/api/ideas/${idea.id}/comments`
+        `https://thoughts-backend-4tsi.onrender.com/api/ideas/${idea.id}/comments`
       );
       setComments(responseData.comments);
     } catch (err) {
@@ -55,7 +55,7 @@ export function useCommentForm(ideaId, onClose) {
 
     try {
       await fetchData(
-        `http://localhost:8001/api/ideas/${ideaId}/comment`,
+        `https://thoughts-backend-4tsi.onrender.com/api/ideas/${ideaId}/comment`,
         "POST",
         JSON.stringify({ content: comment, creator: user.id }),
         {

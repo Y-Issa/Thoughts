@@ -23,7 +23,7 @@ function useCreateIdea() {
     }
     try {
       await fetchData(
-        "http://localhost:8001/api/ideas/",
+        "https://thoughts-backend-4tsi.onrender.com/api/ideas/",
         "POST",
         JSON.stringify({
           title,

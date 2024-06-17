@@ -23,7 +23,7 @@ function Dashboard() {
   return (
     <>
       {(!ideas?.ideas || ideas?.ideas?.length === 0) && <NoContent />}
-      <Box h="79vh" overflowY="scroll" css={scrollbarStyle}>
+      <Box h="79vh" overflowY="scroll" css={scrollbarStyle} overflowX="hidden">
         <SimpleGrid spacing={10} minChildWidth="275px" px="25px">
           {ideas &&
             ideas?.ideas?.map((idea) => <IdeaCard key={idea.id} idea={idea} />)}
@@ -35,7 +35,9 @@ function Dashboard() {
 
 export async function ideasLoader() {
   try {
-    const res = await fetch("http://localhost:8001/api/ideas/");
+    const res = await fetch(
+      "https://thoughts-backend-4tsi.onrender.com/api/ideas/"
+    );
     const data = await res.json();
 
     if (!res.ok) {
