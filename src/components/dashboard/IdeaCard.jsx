@@ -29,7 +29,7 @@ function IdeaCard({ idea, canBeDeleted, onDelete }) {
     >
       <CardHeader>
         <Flex gap={5}>
-          <Avatar src={idea.img} />
+          <Avatar src={idea.creator.image} />
           <Box color="textColor.50">
             <Heading as="h3" size="sm">
               {idea.title}

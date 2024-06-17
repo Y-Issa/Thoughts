@@ -10,6 +10,7 @@ function useUpdateInfo(onClose) {
 
   const [name, setName] = useState(user.name);
   const [bio, setBio] = useState(user.bio);
+  const [image, setImage] = useState(user.image);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
@@ -24,6 +25,7 @@ function useUpdateInfo(onClose) {
         JSON.stringify({
           name,
           bio,
+          image,
           oldPassword,
           newPassword,
         }),
@@ -59,6 +61,8 @@ function useUpdateInfo(onClose) {
     setName,
     bio,
     setBio,
+    image,
+    setImage,
     oldPassword,
     setOldPassword,
     newPassword,

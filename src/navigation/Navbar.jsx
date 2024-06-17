@@ -52,7 +52,11 @@ function Navbar() {
       <Spacer />
 
       <HStack spacing={{ base: "10px", md: "20px" }}>
-        <Avatar name="Mario" bg="purple.100" src="/img/mario.png">
+        <Avatar
+          name={isLoggedIn ? user.name : "Guest"}
+          bg="purple.100"
+          src={isLoggedIn ? user.image : ""}
+        >
           <AvatarBadge w="1.3em" bg="teal.500">
             <Text fontSize="xs" color="white">
               🔥

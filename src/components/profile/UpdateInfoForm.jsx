@@ -10,6 +10,8 @@ function UpdateInfoForm({ onClose }) {
     setName,
     bio,
     setBio,
+    image,
+    setImage,
     oldPassword,
     setOldPassword,
     newPassword,
@@ -36,6 +38,14 @@ function UpdateInfoForm({ onClose }) {
           name="bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
+        />
+        <StyledInput
+          label="profile image URL"
+          type="input"
+          placeholder="Updated img URL (optional)"
+          name="image"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
         />
         <StyledInput
           label="Old Password"
