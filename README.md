@@ -1,8 +1,21 @@
-# React + Vite
+# ThoughtSpace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ThoughtSpace is a web application where users can share and view ideas. It is built with MongoDB, Mongoose, React, Chakra UI, and React Router. The app features user authentication, profile management, and post creation/deletion, commenting on posts, with efficient state management and error handling.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication (sign up, log in, log out)
+- Profile management (update profile details)
+- Create, delete and view posts (ideas)
+- Responsive design with Chakra UI
+
+## Technologies Used
+
+- **Frontend**: React, Chakra UI, React Router
+- **Backend**: Node.js, Express, Mongoose
+- **Database**: MongoDB
+
+## Live Demo
+
+Check out the live app here: [ThoughtSpace](https://thethoughtspace.netlify.app/)
+
