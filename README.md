@@ -8,6 +8,7 @@ ThoughtSpace is a web application where users can share and view ideas. It is bu
 - Profile management (update profile details)
 - Create, delete and view posts (ideas)
 - Responsive design with Chakra UI
+- Dark mode support
 
 ## Technologies Used
 
